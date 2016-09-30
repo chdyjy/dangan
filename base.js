@@ -205,7 +205,7 @@ $(function () {
 	        		var $loadingToast = $('#loadingToast');
 		        	$loadingToast.fadeIn(100);
 		        	$.ajax({
-						url:"http://localhost/chdzsfw/index.php/Portal/Da/Search",
+						url:"http://z.hao.ren/index.php/Portal/Da/Search",
 						type:"post",
 						data:{
 							key:$('.query-string').eq(-1).val()
@@ -244,7 +244,7 @@ $(function () {
                 var $loadingToast = $('#loadingToast');
                     $loadingToast.fadeIn(100);
                     $.ajax({
-                        url:"http://localhost/chdzsfw/index.php/Portal/Da/getinfo",
+                        url:"http://z.hao.ren/index.php/Portal/Da/getinfo",
                         type:"post",
                         data:{
                             key:$(this).data('id')
