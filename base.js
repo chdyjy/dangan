@@ -189,7 +189,7 @@ $(function () {
 	    '#showTooltips': {
 	        click: function () {
 
-	        	if($('input[type=text]').val() == ""){
+	        	if($('.query-string').eq(-1).val() == ""){
 	        		var $tooltips = $('.js_tooltips');
 	            	if ($tooltips.css('display') != 'none') {
 	                	return;
