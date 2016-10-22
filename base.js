@@ -178,14 +178,111 @@ $(function () {
 	        template: '#' + tpl.id
 	    };
 	}
-
 	pages.home.events = {
-		'.js_item': {
+		'.js_category': {
 		    click: function (e) {
 		        var id = $(this).data('id');
 		        pageManager.go(id);
 		    }
 		},
+	};
+
+	pages.library.events = {
+		'#submit-query':{
+			click: function(){
+				var $loadingToast = $('#loadingToast');
+                $loadingToast.fadeIn(100);
+                $.ajax({
+                	url  : "//service.ohao.ren/public/index.php/api/library/query.json",
+                	type : "post",
+                	data : {
+                		n:$("#chd-number").val(),
+                		p:$("#chd-passwd").val(),
+                		c:$("#chd-captcha").val()
+                	},
+                	success:function(data){
+                		$loadingToast.fadeOut(200);
+                		if(data.code == 0){
+                			pageManager.go('error');
+                			setTimeout(function(){
+                                $('.error_reasons').val(data.info);
+                            },10);
+                		}else{
+                			pageManager.go('borrow_info');
+                			setTimeout(function(){
+                				var resultList = '';
+                                $('.chd-name').html(data.info.name);
+                                $('.chd-sex').html(data.info.sex);
+                                $('.chd-college').html(data.info.college);
+                                $('.chd-total').html(data.info.total);
+                                $('.chd-expiring').html(data.info.expiring);
+                                $('.chd-expired').html(data.info.expired);
+                                $.each(data.book,function(i,val){
+                                	resultList += '<a class="weui-cell weui-cell_access show-borrowed-list" href="javascript:;" data-id="'+val.id+'" data-check="'+val.check+'" data-borrowed="'+val.borrowed+'" data-back="'+val.back+'"><div class="weui-cell__bd"><p>'+val.bookName+'</p></div><div class="weui-cell__ft"></div></a>';
+                                });
+                                $('.borrowed-list').html(resultList);
+                            },10);
+                		}
+                	}
+                });
+			}
+		}
+	};
+
+	pages.borrow_info.events={
+		'.show-borrowed-list':{
+			click: function(){
+
+				$('#dialog-title').html($(this).children('.weui-cell__bd').html());
+				//$('#dialog-title').attr('data-id',$(this).attr('data-id'));
+				//console.log($(this).children('.weui-cell__bd').html());
+				$('#dialog-borrowed-time').html("借入日期:"+$(this).attr('data-borrowed'));
+				$('#dialog-back-time').html("应还日期:"+$(this).attr('data-back'));
+				$('#iosDialog1').fadeIn(200);
+				$('#iosDialog1').find('.renew').attr('data-id',$(this).attr('data-id'));
+				$('#iosDialog1').find('.renew').attr('data-check',$(this).attr('data-check'));
+			}
+		},
+		'.renew':{
+			click: function(){
+				$('#iosDialog1 .weui-dialog__ft').html('<a href="javascript:;" bar_code="'+$(this).attr('data-id')+'" check="'+$(this).attr('data-check')+'" class="weui-dialog__btn weui-dialog__btn_primary do-renew">确认续借</a>');
+			
+				$('#iosDialog1 .weui-dialog__bd').html('<img src="//service.ohao.ren/public/index.php/api/library/getVerifyCode"/><input class="weui-input renew-captcha" type="text" autocomplete="off" placeholder="输入验证码">');
+			}
+		},
+		'.do-renew':{
+			click:function(){
+				var $loadingToast = $('#loadingToast');
+                $loadingToast.fadeIn(100);
+                $.ajax({
+                	url  : "//service.ohao.ren/public/index.php/api/library/renew/",
+                	type : "get",
+                	data : {
+                		bar_code: $(this).attr('bar_code'),
+						check: $(this).attr('check'),
+						captcha: $('.renew-captcha').val(),
+						time: new Date().getTime()
+                	},
+                	success:function(data){
+                		if(data.code == 0){
+                			setTimeout(function(){
+                                console.log('续借失败');
+                            },10);
+                		}else{		
+                			setTimeout(function(){
+                				$('#iosDialog2 .weui-dialog__bd').html(data.info);
+                				$('#iosDialog2').fadeIn(200);
+                            },10);
+                		}
+                	}
+                });
+			}
+		}
+
+	};
+
+	pages.dangan.events = {
+		
 	    '#showTooltips': {
 	        click: function () {
 
@@ -205,7 +302,7 @@ $(function () {
 	        		var $loadingToast = $('#loadingToast');
 		        	$loadingToast.fadeIn(100);
 		        	$.ajax({
-						url:"http://z.ohao.ren/index.php?g=Portal&m=Da&a=Search",
+						url:"//service.ohao.ren/public/index.php/api/dangan/search",
 						type:"post",
 						data:{
 							key:$('.query-string').eq(-1).val()
@@ -215,7 +312,7 @@ $(function () {
                             if(data.status == 0){
                                 pageManager.go('no_result');
                             }else{
-                                $('.result-list').html(4);
+                                $('.result-list').html();
                                 
                                 $.each(data.list,function(i,val){
                                     result += '<a class="weui-cell weui-cell_access" href="javascript:;" data-id="'+val.id+'"><div class="weui-cell__bd"><p>'+val.name+'</p></div><div class="weui-cell__ft">'+val.college+'</div></a>';
@@ -225,10 +322,6 @@ $(function () {
                             setTimeout(function(){
                                 $('.result-list').html(result);
                             },10);
-							
-							/*$.each(data.list, function(i,val) {
-								$("#search-list ul").append('<li class="ui-border-t search-result-list" //data-id="'+val.id+'"><					p>'+	val.name+' [<span //class="ui-txt-//rning"> '+val.college+' </span>]</p></li>');
-							});*/
 						
 						}
 					});
@@ -244,7 +337,7 @@ $(function () {
                 var $loadingToast = $('#loadingToast');
                     $loadingToast.fadeIn(100);
                     $.ajax({
-                        url:"http://z.ohao.ren/index.php?g=Portal&m=Da&a=getinfo",
+                        url:"//service.ohao.ren/public/index.php/api/dangan/getinfo",
                         type:"post",
                         data:{
                             key:$(this).data('id')

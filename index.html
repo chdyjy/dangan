@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
         <meta name="format-detection" content="telephone=no">
-        <title>长安大学遗留档案查询</title>
+        <title>长安大学微信小程序</title>
         <link rel="stylesheet" href="//res.wx.qq.com/open/libs/weui/1.0.0/weui.css">
         <link rel="stylesheet" href="//cdn.ohao.ren/example.css">
     </head>
@@ -12,10 +12,190 @@
     <div class="weui-toptips weui-toptips_warn js_tooltips" style="display: none;">不能为空</div>
     <div id="container" class="container"></div>
 <script type="text/html" id="tpl_home">
+<div class="page">
+    <div class="page__hd">
+        <h1 class="page__title">
+            <img src="http://www.chd.edu.cn/images/logo.gif" alt="长安大学微信小程序" />
+        </h1>
+        <p class="page__desc">长大微信小程序目前可实现学生图书借阅情况查询、遗留档案查询，其他应小程序不断开发中……</p>
+    </div>
+    <div class="page__bd page__bd_spacing">
+        <ul>
+            <li>
+                <div class="weui-flex js_category" data-id="library">
+                    <p class="weui-flex__item">图书借阅情况查询</p>
+                    <img src="//cdn.ohao.ren/image/weui/icon_nav_library.png" alt="">
+                </div>
+            </li>
+            <li>
+                <div class="weui-flex js_category" data-id="dangan">
+                    <p class="weui-flex__item">遗留档案查询</p>
+                    <img src="//cdn.ohao.ren/image/weui/icon_nav_search.png" alt="">
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="page__ft">
+        <a href="javascript:home()">Copyright © 2016 长安大学学工部 YYang</a>
+    </div>
+</div>
+</script>
+<script type="text/html" id="tpl_library">
+<div class="page">
+    <div class="page__hd">
+        <h1 class="page__title">
+            <img src="http://www.chd.edu.cn/images/logo.gif" alt="长安大学微信小程序" />
+        </h1>
+        <p class="page__desc">图书借阅信息查询（测试版）</p>
+    </div>
+    <div class="page__bd">
+        <div class="weui-cells__title">请输入您图书馆借阅的账号和密码进行查询</div>
+        <div class="weui-cells weui-cells_form">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">学号</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="chd-number" type="number" pattern="[0-9]*" placeholder="用请输入学号" value="2014124082"/>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label for="" class="weui-label">密码</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="chd-passwd" type="password" value="" placeholder="默认为学号" value="2014124082"/>
+                </div>
+            </div>
+            <div class="weui-cell weui-cell_vcode">
+                <div class="weui-cell__hd"><label class="weui-label">验证码</label></div>
+                <div class="weui-cell__bd">
+                    <input class="weui-input" id="chd-captcha" type="number" placeholder="请输入验证码"/>
+                </div>
+                <div class="weui-cell__ft">
+                    <img class="weui-vcode-img" src="//localhost/changanlib/public/api/library/getVerifyCode" />
+                </div>
+            </div>
+        </div>
+    
+        <div class="weui-btn-area">
+            <a class="weui-btn weui-btn_primary" href="javascript:" id="submit-query">查询</a>
+        </div>
+
+    </div>
+    <div class="page__ft">
+        <a href="javascript:home()">Copyright © 2016 长安大学学工部 YYang</a>
+    </div>
+    <!-- loading toast start-->
+        <div id="loadingToast" style="display:none;">
+             <div class="weui-mask_transparent"></div>
+             <div class="weui-toast">
+                 <i class="weui-loading weui-icon_toast"></i>
+                 <p class="weui-toast__content">数据加载中</p>
+             </div>
+        </div>
+    <!-- loading toast end-->
+</div>
+</script>
+<script type="text/html" id="tpl_error">
+<div class="page">
+    <div class="weui-msg">
+        <div class="weui-msg__icon-area"><i class="weui-icon-warn weui-icon_msg"></i></div>
+        <div class="weui-msg__text-area">
+            <h2 class="weui-msg__title">错误！</h2>
+            <p class="weui-msg__desc">错误原因:<span class="error_reasons"></span></p>
+        </div>
+        <div class="weui-msg__opr-area">
+            <p class="weui-btn-area">
+                <a href="javascript:history.back();" class="weui-btn weui-btn_primary">重新查询</a>
+            </p>
+        </div>
+        <div class="page__ft">
+        <a href="javascript:home()">Copyright © 2016 长安大学学工部 YYang</a>
+        </div>
+    </div>
+</div>
+</script>
+<script type="text/html" id="tpl_borrow_info">
+<div class="page preview js_show">
+    <div class="page__hd">
+        <h1 class="page__title">
+            <img src="http://www.chd.edu.cn/images/logo.gif" alt="WeUI">
+        </h1>
+    </div>
+    <div class="weui-cells__title">图书借阅基本信息</div>
+    <div class="weui-panel" style="margin-bottom:10px;">
+        <div class="weui-panel__bd">
+            <div class="weui-media-box weui-media-box_text">你好，<span class="chd-name"></span></div>
+            <div class="weui-media-box weui-media-box_text">
+                <p class="weui-media-box__desc">五天内即将过期图书：<span class="chd-expiring"></span>，已超期图书 <span class="chd-expired"></span></p>
+                <ul class="weui-media-box__info">
+                    <li class="weui-media-box__info__meta"><span class="chd-sex"></span></li>
+                    <li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><span class="chd-college"></span></li>
+                    <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">累计借书<span class="chd-total"></span></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="weui-cells__title">在借书目列表</div>
+        <div class="weui-cells borrowed-list">
+
+        </div>
+    </div>
+
+    <div class="page__ft">
+        <a href="javascript:home()">Copyright © 2016 长安大学学工部 YYang</a>
+    </div>
+    <div id="dialogs">
+        <!--BEGIN dialog1-->
+        <div class="js_dialog" id="iosDialog1" style="display: none;">
+            <div class="weui-mask"></div>
+            <div class="weui-dialog">
+                <div class="weui-dialog__hd"><strong class="weui-dialog__title" id="dialog-title"></strong></div>
+                <div class="weui-dialog__bd"><p id="dialog-borrowed-time"></p><p id="dialog-back-time"></p></div>
+                <div class="weui-dialog__ft">
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_default">关闭</a>
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary renew">续借</a>
+                </div>
+            </div>
+        </div>
+        <!--END dialog1-->
+    </div>
+    <!-- loading toast start-->
+        <div id="loadingToast" style="display:none;">
+             <div class="weui-mask_transparent"></div>
+             <div class="weui-toast">
+                 <i class="weui-loading weui-icon_toast"></i>
+                 <p class="weui-toast__content">数据加载中</p>
+             </div>
+        </div>
+    <!-- loading toast end-->
+    <!--BEGIN dialog2-->
+        <div class="js_dialog" id="iosDialog2" style="display: none;">
+            <div class="weui-mask"></div>
+            <div class="weui-dialog">
+                <div class="weui-dialog__bd"></div>
+                <div class="weui-dialog__ft">
+                    <a href="javascript:;" class="weui-dialog__btn weui-dialog__btn_primary ok">确定</a>
+                </div>
+            </div>
+        </div>
+    <!--END dialog2-->
+
+    <script type="text/javascript">
+    $(function(){
+        $('#dialogs').on('click', '.weui-dialog__btn', function(){
+            $(this).parents('.js_dialog').fadeOut(200);
+        });
+        $('.ok').on('click',function(){
+            $('.js_dialog').fadeOut(200);
+        });
+    });
+
+    </script>
+</div>
+</script>
+<script type="text/html" id="tpl_dangan">
 	<div class="page home js_show">
 		<div class="page__hd">
         <h1 class="page__title">
-            <img src="http://www.chd.edu.cn/images/logo.gif" alt="WeUI">
+            <img src="http://www.chd.edu.cn/images/logo.gif" alt="长安大学微信小程序">
         </h1>
     	</div>
     	<div class="weui-cells__title">遗留档案查询</div>
