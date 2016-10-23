@@ -1,8 +1,8 @@
 <?php
 require_once('_cookieRequest.php');
 
-$data['number'] = '2014124082';//$_GET['n'];//
-$data['passwd'] = '2014124082';//$_GET['p'];//
+$data['number'] = $_POST['n'];//'2014124082';//
+$data['passwd'] = $_POST['p'];
 $data['captcha'] = $_POST['c'];//'8475';//
 $data['select'] = 'cert_no';
 $content = _cookieRequest(VERIFY_URL,$data,true,false);
