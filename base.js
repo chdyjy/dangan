@@ -169,7 +169,7 @@ $(function () {
 
 	if(window.location.host == 'localhost'){
 		var GLOBAL = {
-			library_query: '//localhost/changanlib/public/api/library/query.json',
+			library_query: '//localhost/changanlib/public/api/library/query',
 			library_verify_img: '//localhost/changanlib/public/api/library/getVerifyCode',
 			library_renew: '//localhost/changanlib/public/api/library/renew',
 			dangan_search: '//localhost/changanlib/public/api/dangan/search',
@@ -177,7 +177,7 @@ $(function () {
 		};
 	}else{
 		var GLOBAL = {
-	 		library_query: '//service.ohao.ren/public/index.php?s=/api/library/query.json',
+	 		library_query: '//service.ohao.ren/public/index.php?s=/api/library/query',
 	 		library_verify_img: '//service.ohao.ren/public/index.php?s=/api/library/getVerifyCode',
 	 		library_renew: '//service.ohao.ren/public/index.php?s=/api/library/renew',
 	 		dangan_search: '//service.ohao.ren/public/index.php?s=/api/dangan/search',
