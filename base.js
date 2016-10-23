@@ -177,11 +177,11 @@ $(function () {
 		};
 	}else{
 		var GLOBAL = {
-	 		library_query: '//service.ohao.ren/public/index.php/api/library/query.json',
-	 		library_verify_img: '//service.ohao.ren/public/index.php/api/library/getVerifyCode',
-	 		library_renew: '//service.ohao.ren/public/index.php/api/library/renew',
-	 		dangan_search: '//service.ohao.ren/public/index.php/api/dangan/search',
-	 		dangan_getinfo: '//service.ohao.ren/public/index.php/api/dangan/getinfo'
+	 		library_query: '//service.ohao.ren/public/index.php?s=/api/library/query.json',
+	 		library_verify_img: '//service.ohao.ren/public/index.php?s=/api/library/getVerifyCode',
+	 		library_renew: '//service.ohao.ren/public/index.php?s=/api/library/renew',
+	 		dangan_search: '//service.ohao.ren/public/index.php?s=/api/dangan/search',
+	 		dangan_getinfo: '//service.ohao.ren/public/index.php?s=/api/dangan/getinfo'
 	 	};
 	}
 	
