@@ -166,6 +166,25 @@ $(function () {
 	    }
 	};
 	var pages = {}, tpls = $('script[type="text/html"]');
+
+	if(window.location.host == 'localhost'){
+		var GLOBAL = {
+			library_query: '//localhost/changanlib/public/api/library/query.json',
+			library_verify_img: '//localhost/changanlib/public/api/library/getVerifyCode',
+			library_renew: '//localhost/changanlib/public/api/library/renew',
+			dangan_search: '//localhost/changanlib/public/api/dangan/search',
+			dangan_getinfo: '//localhost/changanlib/public/api/dangan/getinfo'
+		};
+	}else{
+		var GLOBAL = {
+	 		library_query: '//service.ohao.ren/public/index.php/api/library/query.json',
+	 		library_verify_img: '//service.ohao.ren/public/index.php/api/library/getVerifyCode',
+	 		library_renew: '//service.ohao.ren/public/index.php/api/library/renew',
+	 		dangan_search: '//service.ohao.ren/public/index.php/api/dangan/search',
+	 		dangan_getinfo: '//service.ohao.ren/public/index.php/api/dangan/getinfo'
+	 	};
+	}
+	
 	window.home = function(){
 	    location.hash = '';
 	};
@@ -193,7 +212,7 @@ $(function () {
 				var $loadingToast = $('#loadingToast');
                 $loadingToast.fadeIn(100);
                 $.ajax({
-                	url  : "//service.ohao.ren/public/index.php/api/library/query.json",
+                	url  : GLOBAL.library_query,
                 	type : "post",
                 	data : {
                 		n:$("#chd-number").val(),
@@ -226,6 +245,14 @@ $(function () {
                 	}
                 });
 			}
+		},
+		'.weui-vcode-img':{
+			click: function(){
+				$(this).attr('src',GLOBAL.library_verify_img+'?_='+Math.random());
+			},
+			ready: function(){
+				$('.weui-vcode-img').attr('src',GLOBAL.library_verify_img+'?_='+Math.random());
+			}
 		}
 	};
 
@@ -247,7 +274,7 @@ $(function () {
 			click: function(){
 				$('#iosDialog1 .weui-dialog__ft').html('<a href="javascript:;" bar_code="'+$(this).attr('data-id')+'" check="'+$(this).attr('data-check')+'" class="weui-dialog__btn weui-dialog__btn_primary do-renew">确认续借</a>');
 			
-				$('#iosDialog1 .weui-dialog__bd').html('<img src="//service.ohao.ren/public/index.php/api/library/getVerifyCode"/><input class="weui-input renew-captcha" type="text" autocomplete="off" placeholder="输入验证码">');
+				$('#iosDialog1 .weui-dialog__bd').html('<img src="'+GLOBAL.library_verify_img+'"/><input class="weui-input renew-captcha" type="text" autocomplete="off" placeholder="输入验证码">');
 			}
 		},
 		'.do-renew':{
@@ -255,7 +282,7 @@ $(function () {
 				var $loadingToast = $('#loadingToast');
                 $loadingToast.fadeIn(100);
                 $.ajax({
-                	url  : "//service.ohao.ren/public/index.php/api/library/renew/",
+                	url  : GLOBAL.library_renew,
                 	type : "get",
                 	data : {
                 		bar_code: $(this).attr('bar_code'),
@@ -302,7 +329,7 @@ $(function () {
 	        		var $loadingToast = $('#loadingToast');
 		        	$loadingToast.fadeIn(100);
 		        	$.ajax({
-						url:"//service.ohao.ren/public/index.php/api/dangan/search",
+						url:GLOBAL.dangan_search,
 						type:"post",
 						data:{
 							key:$('.query-string').eq(-1).val()
@@ -337,7 +364,7 @@ $(function () {
                 var $loadingToast = $('#loadingToast');
                     $loadingToast.fadeIn(100);
                     $.ajax({
-                        url:"//service.ohao.ren/public/index.php/api/dangan/getinfo",
+                        url:GLOBAL.dangan_getinfo,
                         type:"post",
                         data:{
                             key:$(this).data('id')
