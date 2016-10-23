@@ -169,17 +169,17 @@ $(function () {
 
 	if(window.location.host == 'localhost'){
 		var GLOBAL = {
-			library_query: '//localhost/changanlib/public/api/library/query',
-			library_verify_img: '//localhost/changanlib/public/api/library/getVerifyCode',
-			library_renew: '//localhost/changanlib/public/api/library/renew',
+			library_query: '//localhost/dangan/query.php',
+			library_verify_img: '//localhost/dangan/getVerifyCode.php',
+			library_renew: '//localhost/dangan/renew.php',
 			dangan_search: '//localhost/changanlib/public/api/dangan/search',
 			dangan_getinfo: '//localhost/changanlib/public/api/dangan/getinfo'
 		};
 	}else{
 		var GLOBAL = {
-	 		library_query: '//service.ohao.ren/public/index.php?s=/api/library/query',
-	 		library_verify_img: '//service.ohao.ren/public/index.php?s=/api/library/getVerifyCode',
-	 		library_renew: '//service.ohao.ren/public/index.php?s=/api/library/renew',
+	 		library_query: '//app.ohao.ren/query.php',
+	 		library_verify_img: '//app.ohao.ren/getVerifyCode.php',
+	 		library_renew: '//app.ohao.ren/renew.php',
 	 		dangan_search: '//service.ohao.ren/public/index.php?s=/api/dangan/search',
 	 		dangan_getinfo: '//service.ohao.ren/public/index.php?s=/api/dangan/getinfo'
 	 	};
@@ -214,6 +214,7 @@ $(function () {
                 $.ajax({
                 	url  : GLOBAL.library_query,
                 	type : "post",
+                	dataType: "json", 
                 	data : {
                 		n:$("#chd-number").val(),
                 		p:$("#chd-passwd").val(),
@@ -284,6 +285,7 @@ $(function () {
                 $.ajax({
                 	url  : GLOBAL.library_renew,
                 	type : "get",
+                	dataType: "json", 
                 	data : {
                 		bar_code: $(this).attr('bar_code'),
 						check: $(this).attr('check'),
@@ -366,6 +368,7 @@ $(function () {
                     $.ajax({
                         url:GLOBAL.dangan_getinfo,
                         type:"post",
+                        dataType: "json", 
                         data:{
                             key:$(this).data('id')
                         },
