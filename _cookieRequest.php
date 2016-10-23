@@ -23,18 +23,21 @@ function _cookieRequest($url, $data = null, $redirect = false, $isLogin = false)
         $params[CURLOPT_POST] = true;
         $params[CURLOPT_POSTFIELDS] = http_build_query($data);
     }
-
-    if (!empty($_COOKIE[COOKIE_NAME]) && is_file(COOKIE_PATH_FILE))
+    
+    if (!empty($_COOKIE[COOKIE_NAME]))
     {
-        $params[CURLOPT_COOKIEFILE] = COOKIE_PATH_FILE;      //这里判断cookie
+    	$cookiePathFile = COOKIE_PATH.$_COOKIE[COOKIE_NAME];
+        $params[CURLOPT_COOKIEFILE] = $cookiePathFile;      //这里判断cookie
         if($isLogin){
-            $params[CURLOPT_COOKIEJAR] = COOKIE_PATH_FILE;
+            $params[CURLOPT_COOKIEJAR] = $cookiePathFile;
         }
     }
     else
     {
-        $params[CURLOPT_COOKIEJAR] = COOKIE_PATH_FILE;      //写入cookie信息
-        setcookie(COOKIE_NAME, rand(10000,99999), time() + 120);      //保存cookie路径
+    	$cookieFile = tempnam(COOKIE_PATH, '');
+    	$cookieFileArray = explode('/',$cookieFile);
+        $params[CURLOPT_COOKIEJAR] = $cookieFile;      //写入cookie信息
+        setcookie(COOKIE_NAME, end($cookieFileArray), time() + 120);      //保存cookie路径
     }
     curl_setopt_array($ch, $params);                                            //传入curl参数
     $content = curl_exec($ch);
