@@ -178,6 +178,7 @@ $(function () {
 		};
 	}else{
 		var GLOBAL = {
+			library_login: '//app.ohao.ren/verify.php',
 	 		library_query: '//app.ohao.ren/query.php',
 	 		library_verify_img: '//app.ohao.ren/getVerifyCode.php',
 	 		library_renew: '//app.ohao.ren/renew.php',
