@@ -37,7 +37,7 @@ function _cookieRequest($url, $data = null, $redirect = false, $isLogin = false)
     	$cookieFile = tempnam(COOKIE_PATH, '');
     	$cookieFileArray = explode('/',$cookieFile);
         $params[CURLOPT_COOKIEJAR] = $cookieFile;      //写入cookie信息
-        setcookie(COOKIE_NAME, end($cookieFileArray), time() + 120);      //保存cookie路径
+        setcookie(COOKIE_NAME, end($cookieFileArray), time() + 3600);      //保存cookie路径
     }
     curl_setopt_array($ch, $params);                                            //传入curl参数
     $content = curl_exec($ch);

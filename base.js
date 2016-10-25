@@ -169,6 +169,7 @@ $(function () {
 
 	if(window.location.host == 'localhost'){
 		var GLOBAL = {
+			library_login: '//localhost/dangan/verify.php',
 			library_query: '//localhost/dangan/query.php',
 			library_verify_img: '//localhost/dangan/getVerifyCode.php',
 			library_renew: '//localhost/dangan/renew.php',
@@ -212,7 +213,7 @@ $(function () {
 				var $loadingToast = $('#loadingToast');
                 $loadingToast.fadeIn(100);
                 $.ajax({
-                	url  : GLOBAL.library_query,
+                	url  : GLOBAL.library_login,
                 	type : "post",
                 	dataType: "json", 
                 	data : {
@@ -228,20 +229,21 @@ $(function () {
                                 $('.error_reasons').val(data.info);
                             },10);
                 		}else{
+                			//$.fn.cookie("HHVTSESSID", '1');
                 			pageManager.go('borrow_info');
-                			setTimeout(function(){
-                				var resultList = '';
-                                $('.chd-name').html(data.info.name);
-                                $('.chd-sex').html(data.info.sex);
-                                $('.chd-college').html(data.info.college);
-                                $('.chd-total').html(data.info.total);
-                                $('.chd-expiring').html(data.info.expiring);
-                                $('.chd-expired').html(data.info.expired);
-                                $.each(data.book,function(i,val){
-                                	resultList += '<a class="weui-cell weui-cell_access show-borrowed-list" href="javascript:;" data-id="'+val.id+'" data-check="'+val.check+'" data-borrowed="'+val.borrowed+'" data-back="'+val.back+'"><div class="weui-cell__bd"><p>'+val.bookName+'</p></div><div class="weui-cell__ft"></div></a>';
-                                });
-                                $('.borrowed-list').html(resultList);
-                            },10);
+                			// setTimeout(function(){
+                			// 	var resultList = '';
+                   //              $('.chd-name').html(data.info.name);
+                   //              $('.chd-sex').html(data.info.sex);
+                   //              $('.chd-college').html(data.info.college);
+                   //              $('.chd-total').html(data.info.total);
+                   //              $('.chd-expiring').html(data.info.expiring);
+                   //              $('.chd-expired').html(data.info.expired);
+                   //              $.each(data.book,function(i,val){
+                   //              	resultList += '<a class="weui-cell weui-cell_access show-borrowed-list" href="javascript:;" data-id="'+val.id+'" data-check="'+val.check+'" data-borrowed="'+val.borrowed+'" data-back="'+val.back+'"><div class="weui-cell__bd"><p>'+val.bookName+'</p></div><div class="weui-cell__ft"></div></a>';
+                   //              });
+                   //              $('.borrowed-list').html(resultList);
+                   //          },10);
                 		}
                 	}
                 });
@@ -305,6 +307,46 @@ $(function () {
                 		}
                 	}
                 });
+			}
+		},
+		'body':{
+			ready:function(){
+				// var init = $.fn.cookie("HHVTSESSID");
+				// if(init == '1'){
+				// 	console.log('false:'+init);
+				// }else{
+				// 	console.log('true:'+init);
+				// }
+				var $loadingToast = $('#loadingToast');
+                $loadingToast.fadeIn(100);
+				$.ajax({
+                	url  : GLOBAL.library_query,
+                	type : "get",
+                	dataType: "json", 
+                	success:function(data){
+                		$loadingToast.fadeOut(200);
+                		if(data.code == 0){
+                			pageManager.go('error');
+                			setTimeout(function(){
+                                $('.error_reasons').val(data.info);
+                                console.log(data.info);
+                            },10);
+                		}else{
+                			var resultList = '';
+                            $('.chd-name').html(data.info.name);
+                            $('.chd-sex').html(data.info.sex);
+                            $('.chd-college').html(data.info.college);
+                            $('.chd-total').html(data.info.total);
+                            $('.chd-expiring').html(data.info.expiring);
+                            $('.chd-expired').html(data.info.expired);
+                            $.each(data.book,function(i,val){
+                            	resultList += '<a class="weui-cell weui-cell_access show-borrowed-list" href="javascript:;" data-id="'+val.id+'" data-check="'+val.check+'" data-borrowed="'+val.borrowed+'" data-back="'+val.back+'"><div class="weui-cell__bd"><p>'+val.bookName+'</p></div><div class="weui-cell__ft"></div></a>';
+                            });
+                            $('.borrowed-list').html(resultList);
+                		}
+                	}
+                });
+
 			}
 		}
 

@@ -1,11 +1,8 @@
 <?php
 require_once('_cookieRequest.php');
+require_once('database.php');
 
-$data['number'] = $_POST['n'];//'2014124082';//
-$data['passwd'] = $_POST['p'];
-$data['captcha'] = $_POST['c'];//'8475';//
-$data['select'] = 'cert_no';
-$content = _cookieRequest(VERIFY_URL,$data,true,false);
+$content = _cookieRequest(REDR_INFO_URL,null,false,false);
 
 if(!strpos($content,UNIQUE_CHAR)){
     preg_match_all('/<font\s+color=\"red\">(.*?)<\/font>/', $content, $err);

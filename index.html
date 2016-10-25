@@ -113,35 +113,50 @@
 </div>
 </script>
 <script type="text/html" id="tpl_borrow_info">
-<div class="page preview js_show">
+<div class="page">
     <div class="page__hd">
         <h1 class="page__title">
             <img src="http://www.chd.edu.cn/images/logo.gif" alt="WeUI">
         </h1>
     </div>
-    <div class="weui-cells__title">图书借阅基本信息</div>
-    <div class="weui-panel" style="margin-bottom:10px;">
-        <div class="weui-panel__bd">
-            <div class="weui-media-box weui-media-box_text">你好，<span class="chd-name"></span></div>
-            <div class="weui-media-box weui-media-box_text">
-                <p class="weui-media-box__desc">五天内即将过期图书：<span class="chd-expiring"></span>，已超期图书 <span class="chd-expired"></span></p>
-                <ul class="weui-media-box__info">
-                    <li class="weui-media-box__info__meta"><span class="chd-sex"></span></li>
-                    <li class="weui-media-box__info__meta weui-media-box__info__meta_extra"><span class="chd-college"></span></li>
-                    <li class="weui-media-box__info__meta weui-media-box__info__meta_extra">累计借书<span class="chd-total"></span></li>
-                </ul>
+    <div class="weui-cells__title">你好，<span class="chd-name"></span>[<span class="chd-college"></span>]</div>
+    <div class="page__bd">
+        <div class="weui-cells">
+            <div class="weui-cell weui-cell_access lib-competive">
+                <div class="weui-cell__hd"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII=" alt="" style="width:20px;margin-right:5px;display:block"></div>
+                <div class="weui-cell__bd">
+                    <p>累计借书：<span class="chd-total"></span></p>
+                </div>
+                <div class="weui-cell__ft"><i class="weui-icon-info-circle"></i>比一比</div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII=" alt="" style="width:20px;margin-right:5px;display:block"></div>
+                <div class="weui-cell__bd">
+                    <p>五天内过期：<span class="chd-expiring"></span></p>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC4AAAAuCAMAAABgZ9sFAAAAVFBMVEXx8fHMzMzr6+vn5+fv7+/t7e3d3d2+vr7W1tbHx8eysrKdnZ3p6enk5OTR0dG7u7u3t7ejo6PY2Njh4eHf39/T09PExMSvr6+goKCqqqqnp6e4uLgcLY/OAAAAnklEQVRIx+3RSRLDIAxE0QYhAbGZPNu5/z0zrXHiqiz5W72FqhqtVuuXAl3iOV7iPV/iSsAqZa9BS7YOmMXnNNX4TWGxRMn3R6SxRNgy0bzXOW8EBO8SAClsPdB3psqlvG+Lw7ONXg/pTld52BjgSSkA3PV2OOemjIDcZQWgVvONw60q7sIpR38EnHPSMDQ4MjDjLPozhAkGrVbr/z0ANjAF4AcbXmYAAAAASUVORK5CYII=" alt="" style="width:20px;margin-right:5px;display:block"></div>
+                <div class="weui-cell__bd">
+                    <p>已超期图书：<span class="chd-expired"></span></p>
+                </div>
             </div>
         </div>
     </div>
     <div class="weui-cells__title">在借书目列表</div>
-        <div class="weui-cells borrowed-list">
-
+        <div class="weui-cells borrowed-list"></div>
+        <div class="page__ft">
+            <a href="javascript:home()">Copyright © 2016 长安大学学工部 YYang</a>
         </div>
-    </div>
-
-    <div class="page__ft">
-        <a href="javascript:home()">Copyright © 2016 长安大学学工部 YYang</a>
-    </div>
+    <!-- loading toast start-->
+        <div id="loadingToast" style="display:none;">
+             <div class="weui-mask_transparent"></div>
+             <div class="weui-toast">
+                 <i class="weui-loading weui-icon_toast"></i>
+                 <p class="weui-toast__content">数据加载中</p>
+             </div>
+        </div>
+    <!-- loading toast end-->
     <div id="dialogs">
         <!--BEGIN dialog1-->
         <div class="js_dialog" id="iosDialog1" style="display: none;">
@@ -157,15 +172,6 @@
         </div>
         <!--END dialog1-->
     </div>
-    <!-- loading toast start-->
-        <div id="loadingToast" style="display:none;">
-             <div class="weui-mask_transparent"></div>
-             <div class="weui-toast">
-                 <i class="weui-loading weui-icon_toast"></i>
-                 <p class="weui-toast__content">数据加载中</p>
-             </div>
-        </div>
-    <!-- loading toast end-->
     <!--BEGIN dialog2-->
         <div class="js_dialog" id="iosDialog2" style="display: none;">
             <div class="weui-mask"></div>
@@ -177,7 +183,7 @@
             </div>
         </div>
     <!--END dialog2-->
-
+</div>
     <script type="text/javascript">
     $(function(){
         $('#dialogs').on('click', '.weui-dialog__btn', function(){
@@ -189,8 +195,8 @@
     });
 
     </script>
-</div>
 </script>
+
 <script type="text/html" id="tpl_dangan">
 	<div class="page home js_show">
 		<div class="page__hd">
@@ -330,6 +336,7 @@
 </script>
         <!--script src="https://cdn.bootcss.com/zepto/1.0rc1/zepto.min.js"></script-->
         <script src="./zepto.min.js"></script>
+        <script src="./zepto.cookie.js"></script>
         <script src="./base.js"></script>
 		<script>
         var _hmt = _hmt || [];
