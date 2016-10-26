@@ -275,7 +275,7 @@ $(function () {
                 	type : "get",
                 	dataType: "json", 
                 	data : {
-                		id:$("#chd-number").val(),
+                		id:$(".chd-id").html(),
                 	},
                 	success:function(data){
                 		$loadingToast.fadeOut(200);
@@ -288,7 +288,12 @@ $(function () {
                 			pageManager.go('king');
                 			setTimeout(function(){
                 				$('.chd-my').html(data.my);
-                				$('.chd-percent').html(data.percent);
+                				$('.chd-percent').html(data.per+'%');
+                				var result = '';
+                				$.each(data.rank,function(i,val){
+                					result += '<div class="weui-cell"><div class="weui-cell__hd"></div><div class="weui-cell__bd"><p>'+val.name+'</p>['+val.college+']</div><div class="weui-cell__ft">'+val.total+'本</div></div>';
+                				});
+                				$('.chd-rank').html(result);
                             },10);
                 		}
                 	}
