@@ -173,6 +173,7 @@ $(function () {
 			library_query: '//localhost/dangan/query.php',
 			library_verify_img: '//localhost/dangan/getVerifyCode.php',
 			library_renew: '//localhost/dangan/renew.php',
+			library_king:'//localhost/dangan/king.php',
 			dangan_search: '//localhost/changanlib/public/api/dangan/search',
 			dangan_getinfo: '//localhost/changanlib/public/api/dangan/getinfo'
 		};
@@ -182,6 +183,7 @@ $(function () {
 	 		library_query: '//app.ohao.ren/query.php',
 	 		library_verify_img: '//app.ohao.ren/getVerifyCode.php',
 	 		library_renew: '//app.ohao.ren/renew.php',
+	 		library_king:'//app.ohao.ren/king.php',
 	 		dangan_search: '//service.ohao.ren/public/index.php?s=/api/dangan/search',
 	 		dangan_getinfo: '//service.ohao.ren/public/index.php?s=/api/dangan/getinfo'
 	 	};
@@ -230,21 +232,7 @@ $(function () {
                                 $('.error_reasons').val(data.info);
                             },10);
                 		}else{
-                			//$.fn.cookie("HHVTSESSID", '1');
                 			pageManager.go('borrow_info');
-                			// setTimeout(function(){
-                			// 	var resultList = '';
-                   //              $('.chd-name').html(data.info.name);
-                   //              $('.chd-sex').html(data.info.sex);
-                   //              $('.chd-college').html(data.info.college);
-                   //              $('.chd-total').html(data.info.total);
-                   //              $('.chd-expiring').html(data.info.expiring);
-                   //              $('.chd-expired').html(data.info.expired);
-                   //              $.each(data.book,function(i,val){
-                   //              	resultList += '<a class="weui-cell weui-cell_access show-borrowed-list" href="javascript:;" data-id="'+val.id+'" data-check="'+val.check+'" data-borrowed="'+val.borrowed+'" data-back="'+val.back+'"><div class="weui-cell__bd"><p>'+val.bookName+'</p></div><div class="weui-cell__ft"></div></a>';
-                   //              });
-                   //              $('.borrowed-list').html(resultList);
-                   //          },10);
                 		}
                 	}
                 });
@@ -263,10 +251,7 @@ $(function () {
 	pages.borrow_info.events={
 		'.show-borrowed-list':{
 			click: function(){
-
 				$('#dialog-title').html($(this).children('.weui-cell__bd').html());
-				//$('#dialog-title').attr('data-id',$(this).attr('data-id'));
-				//console.log($(this).children('.weui-cell__bd').html());
 				$('#dialog-borrowed-time').html("借入日期:"+$(this).attr('data-borrowed'));
 				$('#dialog-back-time').html("应还日期:"+$(this).attr('data-back'));
 				$('#iosDialog1').fadeIn(200);
@@ -279,6 +264,35 @@ $(function () {
 				$('#iosDialog1 .weui-dialog__ft').html('<a href="javascript:;" bar_code="'+$(this).attr('data-id')+'" check="'+$(this).attr('data-check')+'" class="weui-dialog__btn weui-dialog__btn_primary do-renew">确认续借</a>');
 			
 				$('#iosDialog1 .weui-dialog__bd').html('<img src="'+GLOBAL.library_verify_img+'"/><input class="weui-input renew-captcha" type="text" autocomplete="off" placeholder="输入验证码">');
+			}
+		},
+		'.lib-competive':{
+			click:function(){
+				var $loadingToast = $('#loadingToast');
+                $loadingToast.fadeIn(100);
+                $.ajax({
+                	url  : GLOBAL.library_king,
+                	type : "get",
+                	dataType: "json", 
+                	data : {
+                		id:$("#chd-number").val(),
+                	},
+                	success:function(data){
+                		$loadingToast.fadeOut(200);
+                		if(data.code == 0){
+                			pageManager.go('error');
+                			setTimeout(function(){
+                                $('.error_reasons').val('未知错误，请重新来过');
+                            },10);
+                		}else{
+                			pageManager.go('king');
+                			setTimeout(function(){
+                				$('.chd-my').html(data.my);
+                				$('.chd-percent').html(data.percent);
+                            },10);
+                		}
+                	}
+                });
 			}
 		},
 		'.do-renew':{
@@ -312,12 +326,6 @@ $(function () {
 		},
 		'body':{
 			ready:function(){
-				// var init = $.fn.cookie("HHVTSESSID");
-				// if(init == '1'){
-				// 	console.log('false:'+init);
-				// }else{
-				// 	console.log('true:'+init);
-				// }
 				var $loadingToast = $('#loadingToast');
                 $loadingToast.fadeIn(100);
 				$.ajax({
@@ -336,6 +344,7 @@ $(function () {
                 			var resultList = '';
                             $('.chd-name').html(data.info.name);
                             $('.chd-sex').html(data.info.sex);
+                            $('.chd-id').html(data.info.id);
                             $('.chd-college').html(data.info.college);
                             $('.chd-total').html(data.info.total);
                             $('.chd-expiring').html(data.info.expiring);

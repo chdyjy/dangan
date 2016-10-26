@@ -1,7 +1,5 @@
 <?php
 require_once('_cookieRequest.php');
-require_once('database.php');
-
 
 $data['number'] = $_POST['n'];//'2014124082';//
 $data['passwd'] = $_POST['p'];

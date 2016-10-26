@@ -119,7 +119,7 @@
             <img src="http://www.chd.edu.cn/images/logo.gif" alt="WeUI">
         </h1>
     </div>
-    <div class="weui-cells__title">你好，<span class="chd-name"></span>[<span class="chd-college"></span>]</div>
+    <div class="weui-cells__title">你好，<span class="chd-name"></span>[<span class="chd-college"></span>]<span class="chd-id" style="display:none;"></span></div>
     <div class="page__bd">
         <div class="weui-cells">
             <div class="weui-cell weui-cell_access lib-competive">
@@ -196,7 +196,46 @@
 
     </script>
 </script>
-
+<script type="text/html" id="tpl_king">
+    <div class="page">
+    <div class="page__hd">
+        <h1 class="page__title">
+            <img src="http://www.chd.edu.cn/images/logo.gif" alt="WeUI">
+        </h1>
+    </div>
+    <div class="weui-cells__title"><h3>我共借书<span class="weui-form-preview__btn_primary chd-my"></span>本，击败了<span class="weui-cell_warn chd-percent"></span>的同学！</h3></div>
+    <div class="page__bd">
+        <div class="weui-cells__title">借书排行榜</div>
+        <div class="weui-cells">
+            <div class="weui-cell">
+                <div class="weui-cell__hd"></div>
+                <div class="weui-cell__bd">
+                    <p>王恩成</p>
+                </div>
+                <div class="weui-cell__ft">1083本</div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"></div>
+                <div class="weui-cell__bd">
+                    <p>王恩成</p>
+                </div>
+                <div class="weui-cell__ft">1083本</div>
+            </div>
+        </div>
+    </div>
+    <!-- loading toast start-->
+        <div id="loadingToast" style="display:none;">
+             <div class="weui-mask_transparent"></div>
+             <div class="weui-toast">
+                 <i class="weui-loading weui-icon_toast"></i>
+                 <p class="weui-toast__content">数据加载中</p>
+             </div>
+        </div>
+    <!-- loading toast end-->
+    <div class="page__ft">
+        <a href="javascript:home()">Copyright © 2016 长安大学学工部 Yang</a>
+    </div>
+</script>
 <script type="text/html" id="tpl_dangan">
 	<div class="page home js_show">
 		<div class="page__hd">
