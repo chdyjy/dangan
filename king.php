@@ -4,6 +4,8 @@ require_once('_cookieRequest.php');
 require_once('database.php');
 require_once('functions.php');
 
+require_once "jssdk/jssdk.php";
+
 $num = addslashes($_GET['id']);
 
 mysql_select_db("service", $con);
@@ -62,6 +64,17 @@ while ($row = mysql_fetch_assoc($query)) {
 
 }
 $ret['rank'] = $rankInfo;
+
+//微信jssdk参数生成
+
+$jssdk = new JSSDK("wx2d7d1451ecc054df", "ff9a2e46af8c7bad83e035695cbdc97f");
+$signPackage = $jssdk->GetSignPackage();
+
+$ret['jssdk']['appId'] = $signPackage['appId'];
+$ret['jssdk']['timestamp'] = $signPackage['timestamp'];
+$ret['jssdk']['nonceStr'] = $signPackage['nonceStr'];
+$ret['jssdk']['signature'] = $signPackage['signature'];
+
 echo json_encode($ret);
 
 ?>
