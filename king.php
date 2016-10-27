@@ -67,7 +67,7 @@ $ret['rank'] = $rankInfo;
 
 //微信jssdk参数生成
 
-$jssdk = new JSSDK("wx2d7d1451ecc054df", "ff9a2e46af8c7bad83e035695cbdc97f");
+$jssdk = new JSSDK("wx0756f834f4a5d624", "61492ae48866e33ad4e892f27ad24cdd");
 $signPackage = $jssdk->GetSignPackage();
 
 $ret['jssdk']['appId'] = $signPackage['appId'];
