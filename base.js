@@ -314,6 +314,25 @@ $(function () {
                 					result += '<div class="weui-cell"><div class="weui-cell__hd"></div><div class="weui-cell__bd"><p>'+val.name+'</p>['+val.college+']</div><div class="weui-cell__ft">'+val.total+'本</div></div>';
                 				});
                 				$('.chd-rank').html(result);
+               					var title = '书霸在哪儿|我在长大图书馆共借了'+GLOBAL.king.my+'本书，击败了'+GLOBAL.king.per+'%的人，获得“'+GLOBAL.king.nick+'”称号';
+								wx.onMenuShareTimeline({
+    							  title: title,
+    							  link: 'http://app.ohao.ren/#library',
+    							  imgUrl: 'http://cdn.ohao.ren/image/weui/icon_nav_library.png',
+    							  trigger: function (res) {
+    							    // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
+    							    alert('用户点击分享到朋友圈');
+    							  },
+    							  success: function (res) {
+    							    alert('感谢您的分享');
+    							  },
+    							  cancel: function (res) {
+    							    alert('已取消');
+    							  },
+    							  fail: function (res) {
+    							    alert(JSON.stringify(res));
+    							  }
+    							});
                             },10);
                 		}
                 	}
@@ -390,31 +409,7 @@ $(function () {
 	pages.king.events = {
 		'body':{
 			ready:function(){
-				var title = '书霸在哪儿|我在长大图书馆共借了'+GLOBAL.king.my+'本书，击败了'+GLOBAL.king.per+'%的人，获得“'+GLOBAL.king.nick+'”称号';
-				wx.onMenuShareTimeline({
-    			  title: title,
-    			  link: 'http://app.ohao.ren/#library',
-    			  imgUrl: 'http://cdn.ohao.ren/image/weui/icon_nav_library.png',
-    			  trigger: function (res) {
-    			    // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
-    			    alert('用户点击分享到朋友圈');
-    			  },
-    			  success: function (res) {
-    			    alert('感谢您的分享');
-    			  },
-    			  cancel: function (res) {
-    			    alert('已取消');
-    			  },
-    			  fail: function (res) {
-    			    alert(JSON.stringify(res));
-    			  }
-    			});
-			}
-		},
-		'#chd-share':{
-			click:function(){
-				
-    			console.log('已注册获取“分享到朋友圈”状态事件');
+				console.log('king ready');
 			}
 		}
 	}
