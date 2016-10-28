@@ -312,15 +312,21 @@ $(function () {
                 					result += '<div class="weui-cell"><div class="weui-cell__hd"></div><div class="weui-cell__bd"><p>'+val.name+'</p>['+val.college+']</div><div class="weui-cell__ft">'+val.total+'本</div></div>';
                 				});
                 				$('.chd-rank').html(result);
-               					var title = '书霸在哪儿|我共借了'+data.my+'本书，击败了'+data.per+'%的人，获得“'+data.nick+'”称号';
-								var shareData = {
-    							  title: '书霸在哪儿',
-    							  desc: title,
+               					var titleData = '书霸在哪儿|我共借了'+data.my+'本书，击败了'+data.per+'%的人，获得“'+data.nick+'”称号';
+								var shareDataTL = {
+    							  title: titleData,
+    							  desc: '我们来了长安大学·小程序',
     							  link: 'http://app.ohao.ren/#library',
     							  imgUrl: 'http://cdn.ohao.ren/image/weui/icon_nav_library.png',
     							};
-								wx.onMenuShareTimeline(shareData);
-								wx.onMenuShareAppMessage(shareData);
+    							var shareDataAM = {
+    							  title: '书霸在哪儿',
+    							  desc: titleData,
+    							  link: 'http://app.ohao.ren/#library',
+    							  imgUrl: 'http://cdn.ohao.ren/image/weui/icon_nav_library.png',
+    							};
+								wx.onMenuShareTimeline(shareDataTL);
+								wx.onMenuShareAppMessage(shareDataAM);
                             },10);
                 		}
                 	}
