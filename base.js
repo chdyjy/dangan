@@ -285,19 +285,19 @@ $(function () {
                                 $('.error_reasons').html('未知错误，请重新来过');
                             },10);
                 		}else{
+                			wx.config({
+        					    debug: true,
+        					    appId: data.jssdk.appId,
+        					    timestamp: data.jssdk.timestamp,
+        					    nonceStr: data.jssdk.nonceStr,
+        					    signature: data.jssdk.signature,
+        					    jsApiList: [
+        					      'checkJsApi',
+        					      'onMenuShareTimeline'
+        					    ]
+        					});
                 			pageManager.go('king');
                 			setTimeout(function(){
-                				wx.config({
-        						    debug: true,
-        						    appId: data.jssdk.appId,
-        						    timestamp: data.jssdk.timestamp,
-        						    nonceStr: data.jssdk.nonceStr,
-        						    signature: data.jssdk.signature,
-        						    jsApiList: [
-        						      'checkJsApi',
-        						      'onMenuShareTimeline'
-        						    ]
-        						});
                 				$('.chd-my').html(data.my);
                 				$('.chd-percent').html(data.per+'%');
                 				var result = '';
