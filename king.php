@@ -74,7 +74,7 @@ $ret['jssdk']['appId'] = $signPackage['appId'];
 $ret['jssdk']['timestamp'] = $signPackage['timestamp'];
 $ret['jssdk']['nonceStr'] = $signPackage['nonceStr'];
 $ret['jssdk']['signature'] = $signPackage['signature'];
-
+$ret['jsskd']['url'] = $signPackage['url'];
 echo json_encode($ret);
 
 ?>
