@@ -314,8 +314,8 @@ $(function () {
                 				$('.chd-rank').html(result);
                					var title = '书霸在哪儿|我共借了'+data.my+'本书，击败了'+data.per+'%的人，获得“'+data.nick+'”称号';
 								var shareData = {
-    							  title: title,
-    							  desc: '我们来了！长安大学·小程序',
+    							  title: '书霸在哪儿',
+    							  desc: title,
     							  link: 'http://app.ohao.ren/#library',
     							  imgUrl: 'http://cdn.ohao.ren/image/weui/icon_nav_library.png',
     							};
