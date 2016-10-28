@@ -290,10 +290,7 @@ $(function () {
                                 $('.error_reasons').html('未知错误，请重新来过');
                             },10);
                 		}else{
-                			GLOBAL.king.my = data.my;
-                			GLOBAL.king.per = data.per;
-                			GLOBAL.king.nick = data.nick;
-                			console.log(GLOBAL.king.nick);
+                			console.log(data);
                 			wx.config({
         					    debug: false,
         					    appId: data.jssdk.appId,
@@ -314,7 +311,7 @@ $(function () {
                 					result += '<div class="weui-cell"><div class="weui-cell__hd"></div><div class="weui-cell__bd"><p>'+val.name+'</p>['+val.college+']</div><div class="weui-cell__ft">'+val.total+'本</div></div>';
                 				});
                 				$('.chd-rank').html(result);
-               					var title = '书霸在哪儿|我在长大图书馆共借了'+GLOBAL.king.my+'本书，击败了'+GLOBAL.king.per+'%的人，获得“'+GLOBAL.king.nick+'”称号';
+               					var title = '书霸在哪儿|我在长大图书馆共借了'+data.my+'本书，击败了'+data.per+'%的人，获得“'+data.nick+'”称号';
 								wx.onMenuShareTimeline({
     							  title: title,
     							  link: 'http://app.ohao.ren/#library',
