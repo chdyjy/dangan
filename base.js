@@ -175,7 +175,12 @@ $(function () {
 			library_renew: '//localhost/dangan/renew.php',
 			library_king:'//localhost/dangan/king.php',
 			dangan_search: '//localhost/changanlib/public/api/dangan/search',
-			dangan_getinfo: '//localhost/changanlib/public/api/dangan/getinfo'
+			dangan_getinfo: '//localhost/changanlib/public/api/dangan/getinfo',
+			king:{
+				my:'',
+				nick:'',
+				per:''
+			}
 		};
 	}else{
 		var GLOBAL = {
@@ -285,6 +290,10 @@ $(function () {
                                 $('.error_reasons').html('未知错误，请重新来过');
                             },10);
                 		}else{
+                			GLOBAL.king.my = data.my;
+                			GLOBAL.king.per = data.per;
+                			GLOBAL.king.nick = data.nick;
+                			console.log(GLOBAL.king.nick);
                 			wx.config({
         					    debug: true,
         					    appId: data.jssdk.appId,
@@ -381,21 +390,17 @@ $(function () {
 	pages.king.events = {
 		'body':{
 			ready:function(){
-				console.log('king done');
-			}
-		},
-		'#chd-share':{
-			click:function(){
+				var title = '书霸在哪儿|我在长大图书馆共借了'+GLOBAL.king.my+'本书，击败了'+GLOBAL.king.per+'%的人，获得“'+GLOBAL.king.nick+'”称号';
 				wx.onMenuShareTimeline({
-    			  title: '互联网之子',
-    			  link: 'http://movie.douban.com/subject/25785114/',
-    			  imgUrl: 'http://demo.open.weixin.qq.com/jssdk/images/p2166127561.jpg',
+    			  title: title,
+    			  link: 'http://app.ohao.ren/#library',
+    			  imgUrl: 'http://cdn.ohao.ren/image/weui/icon_nav_library.png',
     			  trigger: function (res) {
     			    // 不要尝试在trigger中使用ajax异步请求修改本次分享的内容，因为客户端分享操作是一个同步操作，这时候使用ajax的回包会还没有返回
     			    alert('用户点击分享到朋友圈');
     			  },
     			  success: function (res) {
-    			    alert('已分享');
+    			    alert('感谢您的分享');
     			  },
     			  cancel: function (res) {
     			    alert('已取消');
@@ -404,6 +409,11 @@ $(function () {
     			    alert(JSON.stringify(res));
     			  }
     			});
+			}
+		},
+		'#chd-share':{
+			click:function(){
+				
     			console.log('已注册获取“分享到朋友圈”状态事件');
 			}
 		}

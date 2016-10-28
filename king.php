@@ -35,21 +35,21 @@ $ret['per'] = round($now/$total,4) * 100;
 if($ret['per'] == 100){
 	$nick = 'The King !!!';
 }elseif($ret['per']>=95 && $ret['per']<100){
-	$nick = '图神';
+	$nick = '书神';
 }elseif($ret['per']>=90 && $ret['per']<95){
-	$nick = '图霸';
+	$nick = '书霸';
 }elseif($ret['per']>=85 && $ret['per']<90){
-	$nick = '图优';
+	$nick = '书大拿';
 }elseif($ret['per']>=75 && $ret['per']<85){
-	$nick = '图良';
+	$nick = '书好汉';
 }elseif($ret['per']>=60 && $ret['per']<75){
-	$nick = '图及格';
+	$nick = '书路人';
 }elseif($ret['per']>=40 && $ret['per']<60){
-	$nick = '图渣';
+	$nick = '书渣';
 }elseif($ret['per']>=10 && $ret['per']<40){
-	$nick = '图酥';
+	$nick = '书酥';
 }else{
-	$nick = '图嗯哼';
+	$nick = '书嗯哼';
 }
 
 $ret['nick'] = $nick;
@@ -74,7 +74,6 @@ $ret['jssdk']['appId'] = $signPackage['appId'];
 $ret['jssdk']['timestamp'] = $signPackage['timestamp'];
 $ret['jssdk']['nonceStr'] = $signPackage['nonceStr'];
 $ret['jssdk']['signature'] = $signPackage['signature'];
-$ret['jsskd']['url'] = $signPackage['url'];
 echo json_encode($ret);
 
 ?>
