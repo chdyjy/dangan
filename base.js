@@ -311,7 +311,7 @@ $(function () {
                 					result += '<div class="weui-cell"><div class="weui-cell__hd"></div><div class="weui-cell__bd"><p>'+val.name+'</p>['+val.college+']</div><div class="weui-cell__ft">'+val.total+'本</div></div>';
                 				});
                 				$('.chd-rank').html(result);
-               					var title = '书霸在哪儿|我在长大图书馆共借了'+data.my+'本书，击败了'+data.per+'%的人，获得“'+data.nick+'”称号';
+               					var title = '书霸在哪儿|我共借了'+data.my+'本书，击败了'+data.per+'%的人，获得“'+data.nick+'”称号';
 								wx.onMenuShareTimeline({
     							  title: title,
     							  link: 'http://app.ohao.ren/#library',
