@@ -13,13 +13,9 @@ class JSSDK {
 
     // 注意 URL 一定要动态获取，不能 hardcode.
     $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
-    $url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-    //删除url中#后面的部分
-    if(strpos($url,'#')){ 
-      $urlNoSharp = explode('#',$url);
-    }else{
-      $urlNoSharp[0] = $url;
-    }
+    //$url = "$protocol$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+    $url = 'http://app.ohao.ren/';//动态获取不到有用的亲
+
     $timestamp = time();
     $nonceStr = $this->createNonceStr();
 
