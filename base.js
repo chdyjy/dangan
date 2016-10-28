@@ -295,7 +295,7 @@ $(function () {
                 			GLOBAL.king.nick = data.nick;
                 			console.log(GLOBAL.king.nick);
                 			wx.config({
-        					    debug: true,
+        					    debug: false,
         					    appId: data.jssdk.appId,
         					    timestamp: data.jssdk.timestamp,
         					    nonceStr: data.jssdk.nonceStr,
