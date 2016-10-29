@@ -316,13 +316,13 @@ $(function () {
 								var shareDataTL = {
     							  title: titleData,
     							  desc: '我们来了长安大学·小程序',
-    							  link: 'http://app.ohao.ren/#library',
+    							  link: 'http://mp.weixin.qq.com/s?src=3&timestamp=1477753993&ver=1&signature=PPrrElqwxxnvwqvnh1*ypsvzuRH3eEwxet0MZRlkI4Lkb9QYLnebeeWLIVO8dELWtoMZq59cLf5lZxNHWNiFc7SnJ*xPvuXT8B2CADne7e26I1RKxq9XB4kw-vXiP6FecDCi-dUB*bwOk*O0xsXLXp20PGrxIolvlXwQRiQYD*k=',
     							  imgUrl: 'http://cdn.ohao.ren/image/weui/icon_nav_library.png',
     							};
     							var shareDataAM = {
     							  title: '书霸在哪儿',
     							  desc: titleData,
-    							  link: 'http://app.ohao.ren/#library',
+    							  link: 'http://mp.weixin.qq.com/s?src=3&timestamp=1477753993&ver=1&signature=PPrrElqwxxnvwqvnh1*ypsvzuRH3eEwxet0MZRlkI4Lkb9QYLnebeeWLIVO8dELWtoMZq59cLf5lZxNHWNiFc7SnJ*xPvuXT8B2CADne7e26I1RKxq9XB4kw-vXiP6FecDCi-dUB*bwOk*O0xsXLXp20PGrxIolvlXwQRiQYD*k=',
     							  imgUrl: 'http://cdn.ohao.ren/image/weui/icon_nav_library.png',
     							};
 								wx.onMenuShareTimeline(shareDataTL);
